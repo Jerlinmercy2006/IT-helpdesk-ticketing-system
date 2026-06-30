@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Ticket</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 500px; margin: 50px auto; }
+        label { display: block; margin-top: 12px; font-weight: bold; }
+        input, select, textarea { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+        button { margin-top: 18px; padding: 10px 20px; background: #2E5C8A; color: white; border: none; cursor: pointer; }
+        a { display: inline-block; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <h2>Submit a New Ticket</h2>
+    <form action="/create" method="POST">
+        <label>Title</label>
+        <input type="text" name="title" required>
+
+        <label>Description</label>
+        <textarea name="description" rows="4" required></textarea>
+
+        <label>Priority</label>
+        <select name="priority">
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </select>
+
+        <label>Category</label>
+        <select name="category">
+            <option value="Hardware">Hardware</option>
+            <option value="Software">Software</option>
+            <option value="Network">Network</option>
+        </select>
+
+        <label>Your Email</label>
+        <input type="email" name="email" required>
+
+        <button type="submit">Submit Ticket</button>
+    </form>
+
+    <a href="/tickets">View All Tickets (Admin)</a>
+</body>
+</html>

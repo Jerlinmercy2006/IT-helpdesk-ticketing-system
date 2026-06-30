@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 30px auto; }
+        .chart-box { width: 100%; margin-bottom: 40px; }
+        a { display: inline-block; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <h2>Ticket Dashboard</h2>
+
+    <div class="chart-box">
+        <h3>Tickets by Status</h3>
+        <canvas id="statusChart"></canvas>
+    </div>
+
+    <div class="chart-box">
+        <h3>Tickets by Priority</h3>
+        <canvas id="priorityChart"></canvas>
+    </div>
+
+    <a href="/tickets">Back to Ticket List</a>
+
+    <script>
+        const statusLabels = {{ status_labels | tojson }};
+        const statusValues = {{ status_values | tojson }};
+        const priorityLabels = {{ priority_labels | tojson }};
+        const priorityValues = {{ priority_values | tojson }};
+
+        new Chart(document.getElementById('statusChart'), {
+            type: 'bar',
+            data: {
+                labels: statusLabels,
+                datasets: [{
+                    label: 'Tickets',
+                    data: statusValues,
+                    backgroundColor: '#2E5C8A'
+                }]
+            },
+            options: { scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
+        });
+
+        new Chart(document.getElementById('priorityChart'), {
+            type: 'pie',
+            data: {
+                labels: priorityLabels,
+                datasets: [{
+                    data: priorityValues,
+                    backgroundColor: ['#27ae60', '#d68910', '#c0392b']
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
